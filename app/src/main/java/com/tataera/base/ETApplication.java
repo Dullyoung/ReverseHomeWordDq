@@ -11,7 +11,9 @@ public class ETApplication {
     private static Context mContext;
 
     public static void init(Context context) {
-        mContext = context;
+        if (mContext == null) {
+            mContext = context;
+        }
     }
 
     public static Context getInstance() {
