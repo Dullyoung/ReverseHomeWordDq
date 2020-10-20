@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.tataera.Config;
 import com.tataera.base.ETApplication;
 import com.tataera.base.ETMan;
 import com.tataera.base.http.HttpModuleHandleListener;
@@ -45,23 +46,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void h(String str, HttpModuleHandleListener httpModuleHandleListener) {
         ArrayList arrayList = new ArrayList();
         try {
-            arrayList.add(new BasicNameValuePair("word", URLEncoder.encode(str, "utf-8")));
+            arrayList.add(new BasicNameValuePair("keyword", URLEncoder.encode(str, "utf-8")));
         } catch (Exception e) {
         }
-        mSuperDataMan.handle("http://zuoyeapi.tatatimes.com/homeworkapi/api.s?h=ZYSuggestAnswerHandler", arrayList, httpModuleHandleListener, new IHttpJsonConvert() {
+        mSuperDataMan.handle(Config.SEARCH_URL, arrayList, httpModuleHandleListener, new IHttpJsonConvert() {
             public Object convert(String str) {
                 try {
-                    Map map = (Map) ETMan.getMananger().getGson().fromJson(str, HashMap.class);
-                    List list = (List) map.get("datas");
-                    if (map.get("code").toString().equals("200.0")) {
-                        return list;
-                    }
+//                    Map map = (Map) ETMan.getMananger().getGson().fromJson(str, HashMap.class);
+//                    List list = (List) map.get("datas");
                     Log.i("aaaa", "convert: "+str);
-
-                    return list;
+                return str;
                 } catch (Exception e) {
-                    return null;
                 }
+                return null;
             }
         });
     }

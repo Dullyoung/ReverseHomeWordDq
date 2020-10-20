@@ -71,16 +71,9 @@ public class SuperDataMan {
             Mac instance = Mac.getInstance(HMAC_SHA1_ALGORITHM);
             instance.init(secretKeySpec);
             bArr = c.b(instance.doFinal(str.getBytes()));
-        } catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException | InvalidKeyException e) {
             System.err.println(e.getMessage());
             bArr = null;
-            if (bArr != null) {
-            }
-        } catch (InvalidKeyException e2) {
-            System.err.println(e2.getMessage());
-            bArr = null;
-            if (bArr != null) {
-            }
         }
         if (bArr != null) {
             return new String(bArr);
